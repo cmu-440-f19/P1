@@ -527,14 +527,22 @@ func (ts *windowTestSystem) runWindowBiggerThanUnackTest() {
 	ts.waitForClients() // Wait for clients to finish writing messages to the server.
 
 	// Tell server to begin listening for messages from clients and wait.
-	go ts.readFromAllClients((3*numMsgs/4)*numClients, 0)
+	go ts.readFromAllClients(numMsgs*numClients, (3*numMsgs/4)*numClients)
 	ts.waitForServer()
-	time.Sleep(50 * time.Millisecond)
+	// In order to test whether the window is correct, give the server enough time to
+	// Read additional messages that it is not allowed to deliver until the network
+	// is unblocked
+	time.Sleep(500 * time.Millisecond)
 
 	// Confirm that the server received all of the expected messages from the client.
 	ts.checkServerReadMsgs(ts.clientSendMsgs[:3*numMsgs/4])
 
 	ts.setServerWriteDropPercent(0)
+
+	// Confirm that the remaining messages are successfully read
+	// Note: if you do not consume all of the checkpoint signals before
+	// the test function returns, it is a race condition
+	ts.waitForServer()
 
 	// (2) server to client
 	ts.t.Logf("Testing server to client...")
@@ -550,7 +558,7 @@ func (ts *windowTestSystem) runWindowBiggerThanUnackTest() {
 
 	time.Sleep(2000 * time.Millisecond)
 
-	ts.setClientWriteDropPercent(0) // Let server send back acks
+	ts.setClientWriteDropPercent(0) // Let client send back acks
 	for connID := range ts.clientMap {
 		go ts.streamToClient(connID, ts.serverSendMsgs[numMsgs/4:2*numMsgs/4]) // Start streaming messages to each client.
 	}
@@ -559,7 +567,7 @@ func (ts *windowTestSystem) runWindowBiggerThanUnackTest() {
 	}
 	time.Sleep(200 * time.Millisecond)
 
-	ts.setClientWriteDropPercent(100) // Let server send back acks
+	ts.setClientWriteDropPercent(100) // Don't let clients send back acks
 	for connID := range ts.clientMap {
 		go ts.streamToClient(connID, ts.serverSendMsgs[2*numMsgs/4:]) // Start streaming messages to each client.
 	}
@@ -574,12 +582,17 @@ func (ts *windowTestSystem) runWindowBiggerThanUnackTest() {
 	}
 
 	ts.waitForClients() // Wait for clients to read messages from the server.
+	// In order to test whether the window is correct, give the client enough time to
+	// Read additional messages that it is not allowed to deliver until the network is unblocked
+	time.Sleep(500 * time.Millisecond)
 
 	// Confirm that the server received all of the expected messages from the client.
 	ts.checkClientReadMsgs(ts.serverSendMsgs[:3*numMsgs/4])
 
-	ts.setClientWriteDropPercent(0) // Let server send back acks
+	ts.setClientWriteDropPercent(0) // Let client send back acks
 
+	// Confirm that the remaining messages are successfully read by each client
+	ts.waitForClients() // Wait for clients to read all messages from the server.
 }
 
 func (ts *windowTestSystem) runMessageOrderTest() {
