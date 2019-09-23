@@ -4,12 +4,14 @@ import (
 	"github.com/cmu440/lspnet"
 )
 
-type MsgWrapper struct {
-	addr lspnet.UDPAddr
-	msg Message
+type parsedMsg struct {
+	Addr lspnet.UDPAddr
+	ConnID   int
+	SeqNum   int
+	Payload []byte
 }
 
-func Listen(ntwk string, laddr *lspnet.UDPAddr, msgChan chan MsgWrapper) error {
+func Listen(ntwk string, laddr *lspnet.UDPAddr, msgChan chan parsedMsg) error {
 	return nil
 }
 
