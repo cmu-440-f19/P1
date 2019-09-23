@@ -12,7 +12,7 @@ type parsedMsg struct {
 	Payload []byte
 }
 
-func Listen(ntwk string, laddr *lspnet.UDPAddr, msgChan chan parsedMsg) error {
+func Listen(conn lspnet.UDPConn, msgChan chan parsedMsg) error {
 	return nil
 }
 
