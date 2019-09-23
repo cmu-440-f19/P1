@@ -18,7 +18,7 @@ func uint2Checksum(value uint32) uint32 {
 	binary.LittleEndian.PutUint32(buf, value)
 	lower := binary.LittleEndian.Uint16(buf[0:2])
 	upper := binary.LittleEndian.Uint16(buf[2:4])
-	sum += uint32(lower + upper)
+	sum += uint32(lower) + uint32(upper)
 
 	return sum
 }
