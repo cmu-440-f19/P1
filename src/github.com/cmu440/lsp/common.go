@@ -8,6 +8,7 @@ type parsedMsg struct {
 	Addr lspnet.UDPAddr
 	ConnID   int
 	SeqNum   int
+	Type MsgType
 	Payload []byte
 }
 
