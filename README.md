@@ -104,7 +104,67 @@ tar -cvf lsp.tar lsp/
 
 ## Part B
 
-Coming soon!
+## Part B
+
+### Importing the `bitcoin` package
+
+In order to use the starter code we provide in the `hash.go` and `message.go` files, use the
+following `import` statement:
+
+```go
+import "github.com/cmu440/bitcoin"
+```
+
+Once you do this, you should be able to make use of the `bitcoin` package as follows:
+
+```go
+hash := bitcoin.Hash("thom yorke", 19970521)
+
+msg := bitcoin.NewRequest("jonny greenwood", 200, 71010)
+```
+
+### Compiling the `client`, `miner` & `server` programs
+
+To compile the `client`, `miner`, and `server` programs, use the `go install` command
+as follows (these instructions assume your
+`GOPATH` is pointing to the project's root `p1/` directory):
+
+```bash
+# Compile the client, miner, and server programs. The resulting binaries
+# will be located in the $GOPATH/bin directory.
+go install github.com/cmu440/bitcoin/client
+go install github.com/cmu440/bitcoin/miner
+go install github.com/cmu440/bitcoin/server
+
+# Start the server, specifying the port to listen on.
+$GOPATH/bin/server 6060
+
+# Start a miner, specifying the server's host:port.
+$GOPATH/bin/miner localhost:6060
+
+# Start the client, specifying the server's host:port, the message
+# "bradfitz", and max nonce 9999.
+$GOPATH/bin/client localhost:6060 bradfitz 9999
+```
+
+Note that you will need to use the `os.Args` variable in your code to access the user-specified
+command line arguments.
+
+### Run Sanity Tests
+
+We have provided *basic* tests for your miner and client implementations. Note that passing them does not indicate that your implementation is correct, nor does it mean your code will earn full scores on Autolab. Extra tests are encouraged before you submit your code.
+
+To sanity tests, you need to ensure you have compiled version of `client`, `miner` and `server` in `$GOPATH/bin`. Then you can run `ctest` and `mtest` (without any parameter) in `$GOPATH/bin/{YOUR-OS}/`.
+
+### Submitting to Autolab
+
+To submit your code to Autolab, create a `cmu440.tar` file containing your part A and part B implementation
+as follows:
+
+```sh
+cd p1/src/github.com/
+tar -cvf cmu440.tar cmu440/
+```
 
 
 
