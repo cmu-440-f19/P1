@@ -104,8 +104,6 @@ tar -cvf lsp.tar lsp/
 
 ## Part B
 
-## Part B
-
 ### Importing the `bitcoin` package
 
 In order to use the starter code we provide in the `hash.go` and `message.go` files, use the
