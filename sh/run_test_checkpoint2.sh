@@ -1,55 +1,60 @@
 #!/bin/bash
-
-go test -race -run TestBasic1
-go test -race -run TestBasic2
-go test -race -run TestBasic3
-go test -race -run TestBasic4
-go test -race -run TestBasic5
-go test -race -run TestBasic6
-go test -race -run TestBasic7
-go test -race -run TestBasic8
-go test -race -run TestBasic9
-go test -race -run TestSendReceive1
-go test -race -run TestSendReceive2
-go test -race -run TestSendReceive3
-go test -race -run TestRobust1
-go test -race -run TestRobust2
-go test -race -run TestRobust3
-go test -race -run TestRobust4
-go test -race -run TestRobust5
-go test -race -run TestRobust6
-go test -race -run TestExpBackOff1
-go test -race -run TestExpBackOff2
-go test -race -run TestWindow1
-go test -race -run TestWindow2
-go test -race -run TestWindow3
-go test -race -run TestWindow4
-go test -race -run TestWindow5
-go test -race -run TestWindow6
-go test -race -run TestOutOfOrderMsg1
-go test -race -run TestOutOfOrderMsg2
-go test -race -run TestOutOfOrderMsg3
-go test -race -run TestServerSlowStart1
-go test -race -run TestServerSlowStart2
-go test -race -run TestServerClose1
-go test -race -run TestServerClose2
-go test -race -run TestServerCloseConns1
-go test -race -run TestServerCloseConns2
-go test -race -run TestClientClose1
-go test -race -run TestClientClose2
-go test -race -run TestServerFastClose1
-go test -race -run TestServerFastClose2
-go test -race -run TestServerFastClose3
-go test -race -run TestServerToClient1
-go test -race -run TestServerToClient2
-go test -race -run TestServerToClient3
-go test -race -run TestClientToServer1
-go test -race -run TestClientToServer2
-go test -race -run TestClientToServer3
-go test -race -run TestRoundTrip1
-go test -race -run TestRoundTrip2
-go test -race -run TestRoundTrip3
-go test -race -run TestVariableLengthMsgServer
-go test -race -run TestVariableLengthMsgClient
-go test -race -run TestCorruptedMsgServer
-go test -race -run TestCorruptedMsgClient
+go test -run=TestBasic1 -timeout=5s -race
+go test -run=TestBasic2 -timeout=5s -race
+go test -run=TestBasic3 -timeout=5s -race
+go test -run=TestBasic4 -timeout=10s
+go test -run=TestBasic5 -timeout=10s
+go test -run=TestBasic6 -timeout=20s
+go test -run=TestBasic7 -timeout=20s
+go test -run=TestBasic8 -timeout=20s
+go test -run=TestBasic9 -timeout=20s
+go test -run=TestSendReceive1 -timeout=5s -race
+go test -run=TestSendReceive2 -timeout=5s
+go test -run=TestSendReceive3 -timeout=10s
+go test -run=TestRobust1 -timeout=20s -race
+go test -run=TestRobust2 -timeout=20s
+go test -run=TestRobust3 -timeout=20s
+go test -run=TestRobust4 -timeout=20s
+go test -run=TestRobust5 -timeout=20s -race
+go test -run=TestRobust6 -timeout=20s -race
+go test -run=TestWindow1 -timeout=5s
+go test -run=TestWindow2 -timeout=5s
+go test -run=TestWindow3 -timeout=5s
+go test -run=TestWindow4 -timeout=10s
+go test -run=TestWindow5 -timeout=10s -race
+go test -run=TestWindow6 -timeout=10s -race
+go test -run=TestOutOfOrderMsg1 -timeout=10s -race
+go test -run=TestOutOfOrderMsg2 -timeout=10s -race
+go test -run=TestOutOfOrderMsg3 -timeout=10s -race
+go test -run=TestExpBackOff1 -timeout=60s -race
+go test -run=TestExpBackOff2 -timeout=60s -race
+go test -run=TestMaxUnackedMessages1 -timeout=60s -race
+go test -run=TestMaxUnackedMessages2 -timeout=60s -race
+go test -run=TestMaxUnackedMessages3 -timeout=60s -race
+go test -run=TestMaxUnackedMessages4 -timeout=60s -race
+go test -run=TestMaxUnackedMessages5 -timeout=60s -race
+go test -run=TestMaxUnackedMessages6 -timeout=60s -race
+go test -run=TestServerSlowStart1 -timeout=5s -race
+go test -run=TestServerSlowStart2 -timeout=5s -race
+go test -run=TestServerClose1 -timeout=10s -race
+go test -run=TestServerClose2 -timeout=10s -race
+go test -run=TestServerCloseConns1 -timeout=10s -race
+go test -run=TestServerCloseConns2 -timeout=10s -race
+go test -run=TestClientClose1 -timeout=20s -race
+go test -run=TestClientClose2 -timeout=20s -race
+go test -run=TestServerFastClose1 -timeout=20s -race
+go test -run=TestServerFastClose2 -timeout=20s
+go test -run=TestServerFastClose3 -timeout=20s
+go test -run=TestServerToClient1 -timeout=20s -race
+go test -run=TestServerToClient2 -timeout=20s
+go test -run=TestServerToClient3 -timeout=20s
+go test -run=TestClientToServer1 -timeout=20s -race
+go test -run=TestClientToServer2 -timeout=20s
+go test -run=TestClientToServer3 -timeout=20s
+go test -run=TestRoundTrip1 -timeout=20s -race
+go test -run=TestRoundTrip2 -timeout=20s
+go test -run=TestRoundTrip3 -timeout=30s
+go test -run=TestVariableLengthMsgServer -timeout=3s -race
+go test -run=TestVariableLengthMsgClient -timeout=3s
+go test -run=TestCorruptedMsgServer -timeout=3s -race
+go test -run=TestCorruptedMsgClient -timeout=3s
