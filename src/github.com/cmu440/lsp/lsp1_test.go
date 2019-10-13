@@ -165,7 +165,6 @@ func (ts *testSystem) runTest(timeout int) {
 
 	fmt.Printf("=== %s (%d clients, %d msgs/client, %d%% drop rate, %d window size, %d max unacked messages)\n",
 		ts.desc, ts.numClients, ts.numMsgs, ts.dropPercent, ts.params.WindowSize, ts.params.MaxUnackedMessages)
-
 	clientDoneChan := make(chan bool, ts.numClients)
 	go ts.runServer()
 	for i := range ts.clients {

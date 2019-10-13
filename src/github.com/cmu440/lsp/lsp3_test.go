@@ -152,6 +152,7 @@ func (ts *closeTestSystem) runTest() {
 				t.Fatalf("Test timed out waiting for client")
 			}
 		}
+
 		// Wait for the server.
 		select {
 		case ok := <-ts.serverDoneChan:
@@ -339,7 +340,6 @@ func (ts *closeTestSystem) buildClient(clientID int) {
 }
 
 func (ts *closeTestSystem) testServerClose() bool {
-
 	t := ts.t
 
 	//Test that read returns with error immediately
@@ -377,9 +377,7 @@ func (ts *closeTestSystem) testServerClose() bool {
 
 func (ts *closeTestSystem) testClientClose(clientID int) bool {
 	t := ts.t
-
 	cli := ts.clients[clientID]
-
 	//Test that read returns with error immediately
 	clientReadChan := make(chan error)
 	go func(clientReadChan chan error) {

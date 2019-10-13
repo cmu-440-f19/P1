@@ -92,7 +92,9 @@ func newWindowTestSystem(t *testing.T, mode windowTestMode, numClients, numMsgs 
 		if err != nil {
 			ts.t.Fatalf("Failed to create client: %s", err)
 		}
+		//fmt.Println("brefore")
 		connID := cli.ConnID()
+		//fmt.Println("after")
 		ts.clientMap[connID] = cli
 		ts.serverReadMsgs[connID] = nil
 		ts.clientReadMsgs[connID] = nil
@@ -659,7 +661,7 @@ func TestExpBackOff1(t *testing.T) {
 }
 
 func TestExpBackOff2(t *testing.T) {
-	newWindowTestSystem(t, doExponentialBackOff, 10, 15, &Params{100, 2000, 5, 4, 5}).
+	newWindowTestSystem(t, doExponentialBackOff, 10, 15, &Params{100, 20000, 5, 4, 5}).
 		setDescription("TestExpBackOff2: 10 clients, backoff test").
 		setMaxEpochs(ExponentialBackOffTestEpochToListen + 5).
 		runTest()
